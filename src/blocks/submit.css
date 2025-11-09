@@ -11,3 +11,7 @@
   width: 100px;
   height: 25px;
 }
+
+.submit__btn:hover {
+  cursor: pointer;
+}

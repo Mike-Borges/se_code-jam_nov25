@@ -16,40 +16,37 @@
         <h1 class="header__title">Wallet Vibes: A spending personality test</h1>
       </header>
       <main class="content">
-        <section class="test">
-          <h2 class="test__question">Do you have children?</h2>
-        </section>
-        <section class="cards">
-          <ul class="cards__list">
-            <li class="card">
-              <img src="./images/dollarbill.jpg" alt="" class="card__image" />
-              <div class="card__content">
-                <p class="card__answers">Yes, more than 1</p>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/dollarbill.jpg" alt="" class="card__image" />
-              <div class="card__content">
-                <p class="card__answers">Yes, only 1</p>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/dollarbill.jpg" alt="" class="card__image" />
-              <div class="card__content">
-                <p class="card__answers">Yes, one on the way</p>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/dollarbill.jpg" alt="" class="card__image" />
-              <div class="card__content">
-                <p class="card__answers">No</p>
-              </div>
-            </li>
-          </ul>
-        </section>
-        <div class="submit">
-          <button class="submit__btn">Next</button>
-        </div>
+        <form class="test__form">
+          <section class="test">
+            <h2 class="test__question">Do you have children?</h2>
+          </section>
+          <section class="cards">
+            <template class="test-answer-template">
+              <li class="card">
+                <input
+                  type="radio"
+                  id="answer"
+                  class="test__answer"
+                  name="answers"
+                />
+                <label for="answer">
+                  <img
+                    src="./images/dollarbill.jpg"
+                    alt=""
+                    class="card__image"
+                  />
+                  <div class="card__content">
+                    <p class="card__answers"></p>
+                  </div>
+                </label>
+              </li>
+            </template>
+            <ul class="cards__list"></ul>
+          </section>
+          <div class="submit">
+            <button class="submit__btn" type="submit">Next</button>
+          </div>
+        </form>
       </main>
       <footer class="footer">
         <p class="footer__copyright">2025 &copy; Wallet Vibes Contributors</p>
@@ -62,5 +59,6 @@
         </div>
       </footer>
     </div>
+    <script src="./utils/script.js"></script>
   </body>
 </html>

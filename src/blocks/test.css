@@ -10,3 +10,15 @@
   max-width: 600px;
   margin: 0 auto;
 }
+
+.test__answer {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.test__answer:checked + label {
+  opacity: 0.8;
+  transform: scale(0.98);
+  transition: all 0.2s ease;
+}

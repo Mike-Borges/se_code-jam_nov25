@@ -17,6 +17,11 @@
   width: 100%;
 }
 
+.card label {
+  cursor: pointer;
+  display: block;
+}
+
 .card__answers {
   color: #f57c00;
   margin: 0;
