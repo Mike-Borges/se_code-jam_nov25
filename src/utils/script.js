@@ -7,6 +7,8 @@ const cardTemplate = document
   .content.querySelector(".card");
 const personalityResult = document.querySelector(".final-results__personality");
 const personalityResultImg = document.querySelector(".final-results__img");
+const modal = document.querySelector(".modal");
+const startBtn = modal.querySelector(".modal__start");
 const data = [
   {
     question: "Do you have children?",
@@ -88,3 +90,7 @@ quizzForm.addEventListener("submit", (evt) => {
 
 getAnswers(questionNumber);
 questionElement.textContent = data[questionNumber].question;
+
+startBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});

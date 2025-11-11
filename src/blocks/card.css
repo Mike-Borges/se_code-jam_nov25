@@ -6,6 +6,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
+  border: solid 5px #000;
 }
 
 .card__content {
