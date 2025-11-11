@@ -16,6 +16,10 @@
     inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
 }
 
+.submit__btn_inactive{
+  opacity: 40%;
+}
+
 .submit__btn:hover {
   cursor: pointer;
   color: white;

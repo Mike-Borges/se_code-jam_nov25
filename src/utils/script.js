@@ -1,3 +1,7 @@
+import { enableValidation, disableBtnElement } from "../validation.js";
+
+import { settings, data } from "./constants.js";
+
 const questionElement = document.querySelector(".test__question");
 const cardsList = document.querySelector(".cards__list");
 const buttonElement = document.querySelector(".submit__btn");
@@ -9,28 +13,6 @@ const personalityResult = document.querySelector(".final-results__personality");
 const personalityResultImg = document.querySelector(".final-results__img");
 const modal = document.querySelector(".modal");
 const startBtn = modal.querySelector(".modal__start");
-const data = [
-  {
-    question: "Do you have children?",
-    answer: ["Yes, more than 1", "Yes, only 1", "Yes, one on the way", "No"],
-    values: [1, 2, 3, 4],
-  },
-  {
-    question: "Income level",
-    answer: ["Low", "Medium", "High", "Very High"],
-    values: [1, 2, 3, 4],
-  },
-  {
-    question: "Spending level",
-    answer: ["Save everything", "Moderate", "Spend freely", "Big spender"],
-    values: [1, 2, 3, 4],
-  },
-  {
-    question: "Online shopping habits",
-    answer: ["Never", "Rarely", "Often", "Always"],
-    values: [1, 2, 3, 4],
-  },
-];
 
 let total = 0;
 let questionNumber = 0;
@@ -55,6 +37,8 @@ function getAnswers(number) {
   answerArray.forEach((answer, index) => {
     cardsList.append(getAnswerInput(answer, index));
   });
+
+  disableBtnElement(buttonElement, settings);
 }
 
 quizzForm.addEventListener("submit", (evt) => {
@@ -86,6 +70,9 @@ quizzForm.addEventListener("submit", (evt) => {
     personalityResultImg.style.display = "block";
     buttonElement.style.display = "none";
   }
+
+  disableBtnElement(buttonElement, settings);
+  enableValidation(settings);
 });
 
 getAnswers(questionNumber);
@@ -94,3 +81,5 @@ questionElement.textContent = data[questionNumber].question;
 startBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
 });
+
+enableValidation(settings);
