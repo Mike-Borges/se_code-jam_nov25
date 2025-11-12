@@ -1,0 +1,150 @@
+{
+    "version": "1.0",
+    "description": "Scoring rules for Spending Personality classification. Derived from survey and spending behavior data. Q&A with scoring logic will determine personality assignment",
+    "features_used": [
+        "Income",
+        "TotalMnt",
+        "TotalPurchases",
+        "AvgMntPerPurchase",
+        "DealPurchaseRate",
+        "WebPurchaseShare",
+        "StorePurchaseShare"
+    ],
+    "rules": {
+        "Saver": {
+            "conditions": {
+                "Income": "< 40000",
+                "TotalMnt": "< 200",
+                "DealPurchaseRate": "> 0.20"
+            },
+            "description": "Low-income, budget-conscious shoppers. Prefer in-store shopping, moderate to high deal use, and make small, infrequent purchases.",
+            "tips": [
+                "Focus on essential needs before discretionary spending.",
+                "Use digital coupons and loyalty programs to stretch your budget.",
+                "Track small expenses monthly to stay on goal."
+            ]
+        },
+        "Planner": {
+            "conditions": {
+                "Income": "40000-70000",
+                "TotalMnt": "200-1000",
+                "DealPurchaseRate": "0.10-0.20"
+            },
+            "description": "Balanced and mindful shoppers with moderate income. They plan purchases ahead, shop both online and in-store, and occasionally use deals.",
+            "tips": [
+                "Keep a monthly budget and track progress regularly.",
+                "Use a wishlist before buying non-essentials.",
+                "Leverage cashback or reward programs."
+            ]
+        },
+          "Splurger": {
+            "conditions": {
+                "Income": "> 70000",
+                "TotalMnt": "> 1000",
+                "DealPurchaseRate": "< 0.10"
+            },
+            "description": "High-income, premium spenders who enjoy quality and convenience over discounts. They spend more per purchase and rarely seek deals.",
+            "tips": [
+                "Set aside a fixed percentage of income for luxury or leisure spending.",
+                "Automate savings before discretionary purchases.",
+                "Review annual expenses to identify overspending areas."
+            ]
+        },
+          "Impulse Buyer": {
+            "conditions": {
+                "DealPurchaseRate": "< 0.10",
+                "TotalPurchases": "> 20",
+                "WebPurchaseShare": "> 0.40"
+            },
+            "description": "Frequent online shoppers who make spontaneous purchases with little price comparison. Spend more impulsively across digital channels.",
+            "tips": [
+                "Wait 24 hours before major online purchases.",
+                "Unsubscribe from flash-sale notifications.",
+                "Use shopping lists to stay intentional."
+            ]
+        }
+    },
+    "const_data": [
+      {
+        "question": "What is your approximate yearly income?",
+        "answer": ["under $30k", "$30,000 - $50,000", "$50,000 - $70,000", "Over $70,000"],
+        "planner": [3, 2, 1, 0],
+        "impulse": [0, 1, 2, 3],
+        "splurger": [0, 0, 1, 3],
+        "saver": [0, 0, 1, 3]
+      },
+      {
+        "question": "How much do you spend on average per shopping trip?",
+        "answer": ["Under $20", "$20-40", "$40-70", "Over $70"],
+        "planner": [3,2,0,0],
+        "impulse": [0,2,1,0],
+        "splurger": [0,0,2,3],
+        "saver": [1,2,3,0]
+      },
+      {
+        "question": "How many purchases do you make per month?",
+        "answer": ["1-10 purchases", "11-17 purchases", "18-24 purchases","Over 24 purchases"],
+        "planner": [3,2,1,0],
+        "impulse": [0,2,1,0],
+        "splurger": [0,1,2,3],
+        "saver": [1,2,3,2]
+      },
+      {
+        "question": "How often do you shop using coupons, discounts, or deals?",
+        "answer": ["Rarely or never (0-10% of purchases)", "Occasionally (10-20% of purchases)", "Frequently (20-30% of purchases)", "Almost always (over 30% of purchases)"],
+        "planner": [0,2,3,1],
+        "impulse": [3,2,1,0],
+        "splurger": [3,2,1,0],
+        "saver": [0,1,2,3]
+      },
+      {
+        "question": "What percentage of purchases do you make online?",
+        "answer": ["Less than 20%", "20-30%", "30-40%", "Over 40%"],
+        "planner": [2,3,1,0],
+        "impulse": [0,1,2,3],
+        "splurger": [1,2,1,0],
+        "saver": [3,2,1,0]
+      },
+      {
+        "question": "What percentage of your purchases do you make in physical stores?",
+        "answers": ["Less than 30%", "30-40%", "40-50%", "Over 50%"],
+        "planner": [1,2,2,2],
+        "impulse": [2,3,1,0],
+        "splurger": [1,2,2,1],
+        "saver": [3,2,1,0]
+      },
+      {
+        "question": "How much would you say you spend on products per month?",
+        "answer": ["Under $100", "$100-500", "$500-1,200", "Over $1,200"],
+        "planner": [3,2,0,0],
+        "impulse": [0,1,3,2],
+        "splurger": [0,0,1,3],
+        "saver": [0,2,3,1]
+      },
+      {
+        "question": "When shopping do you typically:...",
+        "answer": ["Buy many items with low prices?", "Buy a moderate number of moderately-priced items?", "Buy fewer items at higher prices", "Mix of all (depends on the situation)"],
+        "planner": [3,2,0,1],
+        "impulse": [1,2,1,2],
+        "splurger": [0,1,3,2],
+        "saver": [1,2,2,1]
+      },
+      {
+        "question": "How do you go about your shopping decisions?",
+        "answer": ["I plan carefully and stick to my shopping list", "I browse and buy things that catch my eye", "I do thorough research and buy quality items", "I wait for best deals before buying"],
+        "planner": [3,0,1,2],
+        "impulse": [0,3,0,0],
+        "splurger": [0,1,3,0],
+        "saver": [2,0,1,3]
+      },
+      {
+        "question": "Which best describes your shopping frequency and style?",
+        "answer": ["Frequent small purchases throughout the month", "Regular purchases when I see what I like", "Occasional large shopping trips", "Mixture of frequent and occasional shopping habits"],
+        "planner": [2,1,0,3],
+        "impulse": [1,3,0,2],
+        "splurger": [0,1,3,2],
+        "saver": [3,1,0,2]
+      }
+  ]
+}
+

@@ -14,11 +14,19 @@ const personalityResultImg = document.querySelector(".final-results__img");
 const modal = document.querySelector(".modal");
 const startBtn = modal.querySelector(".modal__start");
 
-let total = 0;
+let totalPlannerScore = 0;
+let totalSaverScore = 0;
+let totalImpulseScore = 0;
+let totalSplurgerScore = 0;
 let questionNumber = 0;
+const questionData = data["const_data"];
+console.log(questionData[5].question);
+console.log(questionData[5].answer);
+console.log(questionData[5].planner);
+console.log(questionData[5]);
 
 function getAnswers(number) {
-  const answerArray = data[number].answer;
+  const answerArray = questionData[number].answer;
 
   function getAnswerInput(answer, index) {
     const cardElement = cardTemplate.cloneNode(true);
@@ -28,7 +36,10 @@ function getAnswers(number) {
 
     answerElement.textContent = answer;
     answerInput.id = `testAnswer${number}-${index + 1}`;
-    answerInput.value = data[number].values[index];
+    answerInput.plannerScore = questionData[0].planner[index];
+    answerInput.saverScore = questionData[0].saver[index];
+    answerInput.impulseScore = questionData[0].impulse[index];
+    answerInput.splurgerScore = questionData[0].splurger[index];
     labelElement.setAttribute("for", `testAnswer${number}-${index + 1}`);
 
     return cardElement;
@@ -47,10 +58,36 @@ quizzForm.addEventListener("submit", (evt) => {
   const checkedCard = cardsList.querySelector(":checked");
 
   if (checkedCard) {
-    const answerValue = Number(checkedCard.value);
-    total += answerValue;
-    console.log("Selected value:", answerValue);
-    console.log("Total:", total);
+    const answerPlannerScore = Number(checkedCard.plannerScore);
+    totalPlannerScore += answerPlannerScore;
+    const answerSaverScore = Number(checkedCard.saverScore);
+    totalSaverScore += answerSaverScore;
+    const answerImpulseScore = Number(checkedCard.impulseScore);
+    totalImpulseScore += answerImpulseScore;
+    const answerSplurger_score = Number(checkedCard.splurgerScore);
+    totalSplurgerScore += answerSplurger_score;
+    if (buttonElement.textContent === "Submit") {
+      const results = [
+        totalPlannerScore,
+        totalSaverScore,
+        totalImpulseScore,
+        totalSplurgerScore,
+      ];
+
+      console.log(
+        Math.max(
+          totalPlannerScore,
+          totalSaverScore,
+          totalImpulseScore,
+          totalSplurgerScore
+        )
+      );
+
+      console.log("Planner total:", totalPlannerScore);
+      console.log("Saver total:", totalSaverScore);
+      console.log("Impulse total:", totalImpulseScore);
+      console.log("Splurger total:", totalSplurgerScore);
+    }
   }
 
   const oldCards = cardsList.querySelectorAll(".card");
@@ -60,10 +97,11 @@ quizzForm.addEventListener("submit", (evt) => {
 
   questionNumber += 1;
 
-  if (questionNumber <= 3) {
+  if (questionNumber <= questionData.length - 1) {
     getAnswers(questionNumber);
-    questionElement.textContent = data[questionNumber].question;
-    buttonElement.textContent = questionNumber === 3 ? "Submit" : "Next";
+    questionElement.textContent = questionData[questionNumber].question;
+    buttonElement.textContent =
+      questionNumber === questionData.length - 1 ? "Submit" : "Next";
   } else {
     questionElement.textContent = "YOUR FINAL RESULTS";
     personalityResult.style.display = "block";
@@ -76,7 +114,7 @@ quizzForm.addEventListener("submit", (evt) => {
 });
 
 getAnswers(questionNumber);
-questionElement.textContent = data[questionNumber].question;
+questionElement.textContent = questionData[0].question;
 
 startBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
