@@ -26,6 +26,7 @@
   position: absolute;
   opacity: 0;
   pointer-events: none;
+  font-family: "Cinzel", serif;
 }
 
 .test__answer:checked + label .card__image {
@@ -37,5 +38,11 @@
 @media (max-width: 717px) {
   .test__question {
     padding: 5px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .test__question {
+    font-size: 20px;
   }
 }

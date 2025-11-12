@@ -150,7 +150,7 @@ const data = {
       saver: [0, 2, 3, 1],
     },
     {
-      question: "When shopping do you typically:...",
+      question: "When shopping do you typically:",
       answer: [
         "Buy many items with low prices?",
         "Buy a moderate number of moderately-priced items?",

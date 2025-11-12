@@ -24,3 +24,8 @@
   cursor: pointer;
   color: white;
 }
+
+.submit__btn:disabled {
+  cursor:default;
+  color: #000;
+}
